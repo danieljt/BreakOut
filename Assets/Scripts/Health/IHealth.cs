@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using StupidGirlGames.AttackSystem;
 
 namespace StupidGirlGames.HealthSystem
 {
@@ -10,9 +11,9 @@ namespace StupidGirlGames.HealthSystem
     /// </summary>
     public interface IHealth
     {
-        event Action<int> OnHealthChanged;
+        event Action<Attack> OnHealthChanged;
         event Action OnHealthZero;
 
-        void TakeDamage(int health);
+        void TakeDamage(Attack attack);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using StupidGirlGames.AttackSystem;
 
 namespace StupidGirlGames.HealthSystem
 {
@@ -14,7 +15,7 @@ namespace StupidGirlGames.HealthSystem
 		[Tooltip("The maximum health for this component")]
 		public int maxHealth;
 		private int health;
-		public event Action<int> OnHealthChanged;
+		public event Action<Attack> OnHealthChanged;
 		public event Action OnHealthZero;
 
 		private void Awake()
@@ -27,16 +28,16 @@ namespace StupidGirlGames.HealthSystem
 		/// gain will never exceed max health, and will never go below zero.
 		/// </summary>
 		/// <param name="value"></param>
-		public void TakeDamage(int value)
+		public void TakeDamage(Attack attack)
 		{
-			if(health + value > maxHealth)
+			if(health + attack.value > maxHealth)
 			{
-				value = maxHealth - health;
+				attack.value = maxHealth - health;
 			}
 
-			health += value;
+			health += attack.value;
 
-			OnHealthChanged?.Invoke(value);
+			OnHealthChanged?.Invoke(attack);
 
 			// In the case of the health going down to zero
 			if(health <= 0)

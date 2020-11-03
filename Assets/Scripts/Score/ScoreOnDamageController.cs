@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using StupidGirlGames.HealthSystem;
+using StupidGirlGames.AttackSystem;
 
 namespace StupidGirlGames.ScoreSystem
 {
@@ -25,16 +26,32 @@ namespace StupidGirlGames.ScoreSystem
 		{
 			if(healthInterface != null)
 			{
-                //healthInterface.OnHealthChanged
+				healthInterface.OnHealthChanged += GiveScore;
+			}
+		}
+
+		private void OnDisable()
+		{
+			if(healthInterface != null)
+			{
+				healthInterface.OnHealthChanged -= GiveScore;
 			}
 		}
 
 		/// <summary>
 		/// Gives the score to the attacker
 		/// </summary>
-		private void GiveScore()
+		private void GiveScore(Attack attack)
 		{
-
+			GameObject scoreReciever = attack.owner;
+			if(scoreReciever != null)
+			{
+				IScoreReciever recieverInterface = scoreReciever.GetComponent<IScoreReciever>();
+				if(recieverInterface != null)
+				{
+					recieverInterface.RecieveScore(new Score(scoreReciever, score * attack.value));
+				}
+			}
 		}
 	}
 }

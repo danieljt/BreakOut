@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using StupidGirlGames.AttackSystem;
 
 namespace StupidGirlGames.HealthSystem
 {
@@ -10,7 +11,7 @@ namespace StupidGirlGames.HealthSystem
     /// </summary>
     public interface IDeath
     {
-        event Action OnDeath;
+        event Action<Attack> OnDeath;
 
         void Die();
     }

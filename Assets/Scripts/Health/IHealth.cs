@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace StupidGirlGames.Health
+namespace StupidGirlGames.HealthSystem
 {
     /// <summary>
     /// Interface for behaviour concerning health
@@ -13,6 +13,6 @@ namespace StupidGirlGames.Health
         event Action<int> OnHealthChanged;
         event Action OnHealthZero;
 
-        void ChangeHealth(int health);
+        void TakeDamage(int health);
     }
 }

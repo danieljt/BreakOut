@@ -7,12 +7,12 @@ using StupidGirlGames.AttackSystem;
 namespace StupidGirlGames.HealthSystem
 {
     /// <summary>
-    /// Interface for behaviour concerning health
+    /// Interface for behaviours concerning health
     /// </summary>
     public interface IHealth
     {
         event Action<Attack> OnHealthChanged;
-        event Action OnHealthZero;
+        event Action<Attack> OnHealthZero;
 
         void TakeDamage(Attack attack);
     }

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using StupidGirlGames.AttackSystem;
 
 namespace StupidGirlGames.HealthSystem
 {
@@ -14,7 +13,7 @@ namespace StupidGirlGames.HealthSystem
         public IHealth healthInterface;
 
 		// Called when this object dies
-		public event Action OnDeath;
+		public event Action<Attack> OnDeath;
 
 		private void Awake()
 		{
@@ -25,7 +24,7 @@ namespace StupidGirlGames.HealthSystem
 		{
 			if(healthInterface != null)
 			{
-				healthInterface.OnHealthZero += OnDeath;
+				healthInterface.OnHealthZero += Die;
 			}
 		}
 
@@ -33,16 +32,21 @@ namespace StupidGirlGames.HealthSystem
 		{
 			if(healthInterface != null)
 			{
-				healthInterface.OnHealthZero -= OnDisable;
+				healthInterface.OnHealthZero -= Die;
 			}
 		}
 	
 		/// <summary>
-		/// Kill the object. By killing the object, we mean disabling it
+		/// Kill the object. By killing the object, we mean disabling it. This method is not called
+		/// when calling onDestroy or OnDisable.
+		/// 
+		/// TODO:
+		/// Consider adding calls to this method when the gameobject is disabled or destroyed
+		/// outside of this method
 		/// </summary>
-		public void Die()
+		public void Die(Attack attack)
 		{
-			OnDeath?.Invoke();
+			OnDeath?.Invoke(attack);
 			this.gameObject.SetActive(false);
 		}
 	}

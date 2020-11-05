@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
 namespace StupidGirlGames.ScoreSystem
 {
@@ -9,6 +7,7 @@ namespace StupidGirlGames.ScoreSystem
     /// </summary>
     public interface IScoreReciever
     {
+        event Action<Score> OnScoreRecieved;
         void RecieveScore(Score score);      
     }
 }

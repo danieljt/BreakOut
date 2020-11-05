@@ -13,6 +13,6 @@ namespace StupidGirlGames.HealthSystem
     {
         event Action<Attack> OnDeath;
 
-        void Die();
+        void Die(Attack attack);
     }
 }

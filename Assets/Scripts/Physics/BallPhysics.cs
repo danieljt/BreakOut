@@ -11,12 +11,27 @@ namespace StupidGirlGames.BreakOut
     /// </summary>
     public class BallPhysics : MonoBehaviour
     {
-        [Tooltip("This is the maximum speed of the ball")]
+        [Tooltip("This is the maximum speed of the ball. Must be more than 1 to account for the bounce threeshold")]
+        [Range(1.0f, 10f)]
         public float maxSpeed;
 
+        [Tooltip("The start direction of the ball. This will be normalized")]
+        public Vector2 startDirection;
+
+        private Rigidbody2D body;
+
+		private void Awake()
+		{
+            body = GetComponent<Rigidbody2D>();
+		}
+
+		private void Start()
+		{
+            body.velocity = startDirection.normalized*maxSpeed;
+		}
+
         /// <summary>
-        /// We use this method to script in custom collision responses that are both unrealistic and fun.
-        /// Consider adding more fun responses in this method
+        /// We compute special collision responses to certain objects
         /// </summary>
         /// <param name="collision"></param>
 		private void OnCollisionEnter2D(Collision2D collision)

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,9 +14,16 @@ namespace StupidGirlGames.ScoreSystem
 		[Tooltip("Current score")]
 		public int score;
 
+		public event Action<Score> OnScoreRecieved;
+
+		/// <summary>
+		/// Called upon recieving a score.
+		/// </summary>
+		/// <param name="addedScore"></param>
 		public void RecieveScore(Score addedScore)
 		{
-			score = addedScore.value;
+			score += addedScore.value;
+			OnScoreRecieved?.Invoke(addedScore);
 		}
 	}
 }

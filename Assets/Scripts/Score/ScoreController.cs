@@ -11,10 +11,15 @@ namespace StupidGirlGames.ScoreSystem
 	/// </summary>
 	public class ScoreController : MonoBehaviour, IScoreReciever
 	{
-		[Tooltip("Current score")]
-		public int score;
+		// The current score of the script
+		private int score;
 
 		public event Action<Score> OnScoreRecieved;
+
+		private void Awake()
+		{
+			score = 0;
+		}
 
 		/// <summary>
 		/// Called upon recieving a score.

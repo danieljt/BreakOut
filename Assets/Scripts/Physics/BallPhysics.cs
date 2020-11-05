@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using StupidGirlGames.HealthSystem;
+using StupidGirlGames.AttackSystem;
 using UnityEngine;
 
 namespace StupidGirlGames.BreakOut
@@ -14,6 +14,9 @@ namespace StupidGirlGames.BreakOut
         [Tooltip("This is the maximum speed of the ball. Must be more than 1 to account for the bounce threeshold")]
         [Range(1.0f, 10f)]
         public float maxSpeed;
+
+        [Tooltip("This is the damage done by the ball")]
+        public int damage;
 
         [Tooltip("The start direction of the ball. This will be normalized")]
         public Vector2 startDirection;
@@ -36,7 +39,11 @@ namespace StupidGirlGames.BreakOut
         /// <param name="collision"></param>
 		private void OnCollisionEnter2D(Collision2D collision)
 		{
-			
+            IHealth healthInterface = collision.gameObject.GetComponent<IHealth>();
+            if(healthInterface != null)
+			{
+                healthInterface.LoseHealth(new Attack(this.gameObject, damage));
+			}
 		}
 	}
 }

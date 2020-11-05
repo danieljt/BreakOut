@@ -14,6 +14,7 @@ namespace StupidGirlGames.HealthSystem
         event Action<Attack> OnHealthChanged;
         event Action<Attack> OnHealthZero;
 
-        void TakeDamage(Attack attack);
+        void LoseHealth(Attack attack);
+        void GainHealth(Attack attack);
     }
 }

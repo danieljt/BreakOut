@@ -22,25 +22,18 @@ namespace StupidGirlGames.BreakOut
         public Vector2 startDirection;
 
         private Rigidbody2D body;
-		private GameObject owner;
+		private readonly GameObject owner;
 
         /// <summary>
-        /// The owner of this ball
+        /// The owner of this ball. By default, this gameobject will be it's own owner.
+        /// Remember to set this property on instantiation.
         /// </summary>
-        public GameObject Owner
-		{
-			set { owner = value; }
-			get { return owner; }
-		}
+        public GameObject Owner { set; get; }
 
 		private void Awake()
 		{
+            Owner = this.gameObject;
             body = GetComponent<Rigidbody2D>();
-		}
-
-		private void Start()
-		{
-            body.velocity = startDirection.normalized*maxSpeed;
 		}
 
         /// <summary>
@@ -52,8 +45,11 @@ namespace StupidGirlGames.BreakOut
             IHealth healthInterface = collision.gameObject.GetComponent<IHealth>();
             if(healthInterface != null)
 			{
-                healthInterface.LoseHealth(new Attack(owner, damage));
+                healthInterface.LoseHealth(new Attack(Owner, damage));
 			}
+
+            // make sure the ball does not exceed the max velocity
+            body.velocity = body.velocity.normalized * maxSpeed;
 		}
 
         /// <summary>

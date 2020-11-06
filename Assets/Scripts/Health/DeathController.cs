@@ -10,10 +10,21 @@ namespace StupidGirlGames.HealthSystem
     /// </summary>
     public class DeathController : MonoBehaviour, IDeath
     {
-        public IHealth healthInterface;
+		public DeathBehaviour deathBehaviour;
 
 		// Called when this object dies
 		public event Action<Attack> OnDeath;
+		public IHealth healthInterface;
+
+		/// <summary>
+		/// The behaviour when this gameobject dies. Decides if the game object is destroyed or disabled on death.
+		/// It is advised to use DisableObject when many objects are spawned and killed.
+		/// </summary>
+		public enum DeathBehaviour
+		{
+			DestroyObject,
+			DisableObject
+		}
 
 		private void Awake()
 		{
@@ -37,8 +48,8 @@ namespace StupidGirlGames.HealthSystem
 		}
 	
 		/// <summary>
-		/// Kill the object. By killing the object, we mean disabling it. This method is not called
-		/// when calling onDestroy or OnDisable.
+		/// Kill the object. The object is killed according to how the deathBehaviour selected. It is important to
+		/// note that this method or the OnDeath event are not called when the object is destroyed or disabled out of this scope.
 		/// 
 		/// TODO:
 		/// Consider adding calls to this method when the gameobject is disabled or destroyed
@@ -47,7 +58,16 @@ namespace StupidGirlGames.HealthSystem
 		public void Die(Attack attack)
 		{
 			OnDeath?.Invoke(attack);
-			this.gameObject.SetActive(false);
+
+			switch(deathBehaviour)
+			{
+				case DeathBehaviour.DestroyObject:
+					Destroy(this.gameObject);
+					break;
+				case (DeathBehaviour.DisableObject): 
+					this.gameObject.SetActive(false);
+					break;
+			}			
 		}
 	}
 }

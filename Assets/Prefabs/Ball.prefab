@@ -144,6 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceca9f1d0e21f5043856509f5c21736d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
+  maxSpeed: 7
   damage: 1
   startDirection: {x: 2, y: 1}

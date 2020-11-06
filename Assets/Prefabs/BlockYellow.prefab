@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8641100264346234506}
   - component: {fileID: 1197863289571177895}
   - component: {fileID: 1571690704459147283}
+  - component: {fileID: -6477273525746806605}
   m_Layer: 0
   m_Name: BlockYellow
   m_TagString: Untagged
@@ -186,3 +187,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c377629747eb04ba694934384e1bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6477273525746806605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160331511492193082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0380ba83ea1b13488a33bda35dbe9f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runTimeList: {fileID: 11400000, guid: 0b209509f863bcd4d86b3905c95a74e1, type: 2}

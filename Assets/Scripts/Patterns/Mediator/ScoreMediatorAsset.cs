@@ -8,6 +8,7 @@ namespace StupidGirlGames.Patterns.Mediator
     /// <summary>
     /// A score mediator defines a intermidiary between a score giver and a listener.
     /// </summary>
+    [CreateAssetMenu(menuName = "Patterns/Mediator/ScoreMediatorAsset")]
     public class ScoreMediatorAsset : MediatorAsset<Score>
     {
 

@@ -8,7 +8,7 @@ namespace StupidGirlGames.HealthSystem
     /// Class for handling the death of a gameobject. This component communicates directly with
     /// an Ihealth interface if added, but does not require it to function.
     /// </summary>
-    public class Death : MonoBehaviour, IDeath
+    public class DeathController : MonoBehaviour, IDeath
     {
         public IHealth healthInterface;
 

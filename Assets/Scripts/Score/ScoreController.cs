@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StupidGirlGames.Patterns.Mediator;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,14 +12,33 @@ namespace StupidGirlGames.ScoreSystem
 	/// </summary>
 	public class ScoreController : MonoBehaviour, IScoreReciever
 	{
-		// The current score of the script
-		private int score;
+		[Tooltip("The mediator this controller communicates with")]
+		public ScoreMediatorAsset scoreMediator;
 
 		public event Action<Score> OnScoreRecieved;
+
+		// The current score of the script
+		private int score;
 
 		private void Awake()
 		{
 			score = 0;
+		}
+
+		private void OnEnable()
+		{
+			if (scoreMediator != null)
+			{
+				OnScoreRecieved += scoreMediator.Notify;
+			}
+		}
+
+		private void OnDisable()
+		{
+			if (scoreMediator != null)
+			{
+				OnScoreRecieved -= scoreMediator.Notify;
+			}
 		}
 
 		/// <summary>

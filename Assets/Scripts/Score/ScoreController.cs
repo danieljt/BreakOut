@@ -48,7 +48,7 @@ namespace StupidGirlGames.ScoreSystem
 		public void RecieveScore(Score addedScore)
 		{
 			score += addedScore.value;
-			OnScoreRecieved?.Invoke(addedScore);
+			OnScoreRecieved?.Invoke(new Score(addedScore.reciever, score));
 		}
 	}
 }

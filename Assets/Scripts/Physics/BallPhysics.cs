@@ -22,6 +22,16 @@ namespace StupidGirlGames.BreakOut
         public Vector2 startDirection;
 
         private Rigidbody2D body;
+		private GameObject owner;
+
+        /// <summary>
+        /// The owner of this ball
+        /// </summary>
+        public GameObject Owner
+		{
+			set { owner = value; }
+			get { return owner; }
+		}
 
 		private void Awake()
 		{
@@ -42,8 +52,17 @@ namespace StupidGirlGames.BreakOut
             IHealth healthInterface = collision.gameObject.GetComponent<IHealth>();
             if(healthInterface != null)
 			{
-                healthInterface.LoseHealth(new Attack(this.gameObject, damage));
+                healthInterface.LoseHealth(new Attack(owner, damage));
 			}
+		}
+
+        /// <summary>
+        /// Sets the direction and send the ball in that direction with the max speed
+        /// </summary>
+        /// <param name="direction"></param>
+        public void SetDirection(Vector2 direction)
+		{
+            body.velocity = direction.normalized * maxSpeed;
 		}
 	}
 }

@@ -9,8 +9,12 @@ namespace StupidGirlGames.BreakOut
     public class PaddleController : MonoBehaviour
     {
 		public float speed;
+		public GameObject ballPrefab;
+		public Vector2 launchDirection;
+
         private PlayerInput input;
         private Rigidbody2D body;
+		private GameObject ball;
 
 		private void Awake()
 		{
@@ -55,7 +59,22 @@ namespace StupidGirlGames.BreakOut
 		{
 			if(context.action.name == "Fire")
 			{
+				LaunchBall();
+			}
+		}
 
+		/// <summary>
+		/// Launches a new ball
+		/// </summary>
+		private void LaunchBall()
+		{
+			if (ball == null)
+			{
+				ball = Instantiate(ballPrefab);
+				ball.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+				BallPhysics ballPhysics = ball.GetComponent<BallPhysics>();
+				ballPhysics.Owner = this.gameObject;
+				ballPhysics.SetDirection(launchDirection);
 			}
 		}
 	}

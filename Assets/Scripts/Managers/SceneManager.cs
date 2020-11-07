@@ -13,18 +13,48 @@ namespace StupidGirlGames.BreakOut
     /// </summary>
     public class SceneManager : MonoBehaviour
     {
-        [Tooltip("This is the list of blocks in the scene")]
-        public GameObjectRunTimeList blocks;
+        [Tooltip("The game manager prefab. In case of the manager not being instantiated, the scene manager can instantiate a copy")]
+        public GameManager gameManagerPrefab;
 
-        [Tooltip("This is the list of enemies in the scene")]
-        public GameObjectRunTimeList enemies;
+        [Tooltip("This is the list win conditions. When this list is empty, the scene is complete")]
+        public GameObjectRunTimeList winConditions;
 
         // This event is invoked when all the conditions in the scene have been met
         public event Action OnSceneComplete;
 
+        // This event is invoked when a scene is failed
+        public event Action OnSceneFailed;
+
+		private void Awake()
+		{
+			if(!GameManager.IsInstantiated)
+			{
+                Instantiate(gameManagerPrefab);
+			}
+		}
+
 		private void OnEnable()
 		{
-			
+            if (winConditions != null)
+            {
+                winConditions.OnEmpty += WinConditionsMet;
+            }
+		}
+
+		private void OnDisable()
+		{
+            if (winConditions != null)
+            {
+                winConditions.OnEmpty -= WinConditionsMet;
+            }
+		}
+
+        /// <summary>
+        /// This method 
+        /// </summary>
+		private void WinConditionsMet()
+		{
+            OnSceneComplete?.Invoke();
 		}
 	}
 }

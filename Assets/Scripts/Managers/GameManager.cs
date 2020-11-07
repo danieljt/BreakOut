@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StupidGirlGames.Patterns.Singleton;
 
-public class GameManager : MonoBehaviour
+namespace StupidGirlGames.BreakOut
 {
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// A game manager controls the flow of the game state and the save/load functionality. The game manager
+    /// is a singleton as it needs to work from any scene
+    /// </summary>
+    public class GameManager : Singleton<GameManager>
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+		private void Start()
+		{
+            DontDestroyOnLoad(this);
+		}
+	}
 }

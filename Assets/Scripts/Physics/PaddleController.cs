@@ -72,9 +72,12 @@ namespace StupidGirlGames.BreakOut
 			{
 				ball = Instantiate(ballPrefab);
 				ball.transform.position = transform.position + new Vector3(0, 0.5f, 0);
-				BallPhysics ballPhysics = ball.GetComponent<BallPhysics>();
-				ballPhysics.Owner = this.gameObject;
-				ballPhysics.SetDirection(launchDirection);
+				BallController ballController = ball.GetComponent<BallController>();
+				if(ballController != null)
+				{
+					ballController.Owner = this.gameObject;
+					ballController.SetDirection(launchDirection);
+				}
 			}
 		}
 	}

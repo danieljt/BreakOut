@@ -19,14 +19,24 @@ namespace StupidGirlGames.BreakOut
         [Tooltip("This is the list of win conditions. When this list is empty, the scene is complete")]
         public GameObjectRunTimeList winConditions;
 
+        [Tooltip("The number of win conditions to satisfy before the level is complete")]
+        public int winConditionsToWin;
+
         [Tooltip("This is the list of fail conditions. When this list is empty, the scene ends with game over")]
         public GameObjectRunTimeList failConditions;
 
+        [Tooltip("This is the amount of winconsitions to satisfy before the level is failed")]
+        public int failConditionsToFail;
+
         // This event is invoked when all the conditions in the scene have been met
-        public event Action OnSceneComplete;
+        public event Action OnLevelComplete;
 
         // This event is invoked when a scene is failed
-        public event Action OnSceneFailed;
+        public event Action OnLevelFailed;
+
+        // Use these conters to count win and fail conditions when they are called
+        private int winCounter;
+        private int failCounter;
 
 		private void Awake()
 		{
@@ -34,53 +44,66 @@ namespace StupidGirlGames.BreakOut
 			{
                 Instantiate(gameManagerPrefab);
 			}
+
+            winCounter = 0;
+            failCounter = 0;
 		}
 
 		private void OnEnable()
 		{
             if (winConditions != null)
             {
-                winConditions.OnEmpty += LevelCompleted;
+                winConditions.OnEmpty += WinConditionMet ;
             }
 
             if(failConditions != null)
 			{
-                failConditions.OnEmpty += LevelFailed;
+                failConditions.OnEmpty += FailConditionMet;
 			}
 
-            OnSceneComplete += GameManager.Instance.LoadNextLevel;
+            OnLevelComplete += GameManager.Instance.LoadNextLevel;
 		}
 
 		private void OnDisable()
 		{
             if (winConditions != null)
             {
-                winConditions.OnEmpty -= LevelCompleted;
+                winConditions.OnEmpty -= WinConditionMet;
             }
 
             if(failConditions != null)
 			{
-                failConditions.OnEmpty -= LevelFailed;
+                failConditions.OnEmpty -= FailConditionMet;
 			}
 
-            OnSceneComplete -= GameManager.Instance.LoadNextLevel;
+            OnLevelComplete -= GameManager.Instance.LoadNextLevel;
 
 		}
 
         /// <summary>
-        /// This method is invoked when all win conditions are met and the level has been completed
+        /// Called everytime a win condition is met. When enough win conditions are met
+        /// the level managers calls the LevelComplete event.
         /// </summary>
-		private void LevelCompleted()
+        private void WinConditionMet()
 		{
-            OnSceneComplete?.Invoke();
+            winCounter++;
+            if(winCounter >= winConditionsToWin)
+			{
+                OnLevelComplete?.Invoke();
+			}
 		}
 
         /// <summary>
-        /// This method is invoked when a fail condition is met
+        /// Called everytime a fail condition is met. When enough fail conditions are met
+        /// the level manager calls the OnLevelFailed event. 
         /// </summary>
-        private void LevelFailed()
+        private void FailConditionMet()
 		{
-            OnSceneFailed?.Invoke();
+            failCounter++;
+            if(failCounter >= failConditionsToFail)
+			{
+                OnLevelFailed?.Invoke();
+			}
 		}
 	}
 }

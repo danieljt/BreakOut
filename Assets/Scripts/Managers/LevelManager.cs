@@ -28,6 +28,12 @@ namespace StupidGirlGames.BreakOut
         [Tooltip("This is the amount of winconsitions to satisfy before the level is failed")]
         public int failConditionsToFail;
 
+        [Tooltip("When the levelmanager is completed, the event is sent to this mediator")]
+        public MediatorAsset winMediator;
+
+        [Tooltip("When the levelmanager is failed, the event is sent to this mediator")]
+        public MediatorAsset failMediator;
+
         // This event is invoked when all the conditions in the scene have been met
         public event Action OnLevelComplete;
 
@@ -61,9 +67,18 @@ namespace StupidGirlGames.BreakOut
                 failConditions.OnEmpty += FailConditionMet;
 			}
 
-            OnLevelComplete += GameManager.Instance.LoadNextLevel;
+            if(winMediator != null)
+            {
+                OnLevelComplete += winMediator.Notify;
+            }
+
+            if(failMediator != null)
+            {
+                OnLevelFailed += failMediator.Notify;
+            }
 		}
 
+        
 		private void OnDisable()
 		{
             if (winConditions != null)
@@ -76,8 +91,15 @@ namespace StupidGirlGames.BreakOut
                 failConditions.OnEmpty -= FailConditionMet;
 			}
 
-            OnLevelComplete -= GameManager.Instance.LoadNextLevel;
+            if(winMediator != null)
+            {
+                OnLevelComplete -= winMediator.Notify;
+            }
 
+            if(failMediator != null)
+            {
+                OnLevelFailed -= failMediator.Notify;
+            }
 		}
 
         /// <summary>

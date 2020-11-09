@@ -9,7 +9,7 @@ namespace StupidGirlGames.Patterns.Mediator
     /// the message is an int.
     /// </summary>
     [CreateAssetMenu(menuName = "Patterns/Mediator/IntMediatorAsset")]
-    public class IntMediatorAsset : MediatorAsset<int>
+    public class IntMediatorAsset : AbstractMediatorAsset<int>
     {
 
     }

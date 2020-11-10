@@ -9,6 +9,7 @@ namespace StupidGirlGames.Patterns.Mediator
     /// This object can be stored as an asset, and we can therefore avoid using the singleton
     /// pattern in these cases.
     /// </summary>
+    [CreateAssetMenu(menuName = "Patterns/Mediator/MediatorAsset")]
     public class MediatorAsset : ScriptableObject
     {
         // This event is called when an object calls the notify 

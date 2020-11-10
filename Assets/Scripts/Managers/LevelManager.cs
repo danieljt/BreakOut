@@ -8,31 +8,37 @@ namespace StupidGirlGames.BreakOut
 {
     /// <summary>
     /// A scenemanager is the main manager for each scene. This script holds important information about the
-    /// blocks, enemies and other important entities required to beat a level. A scenemanager communicates
-    /// directly with the gamemanager singleton.
+    /// blocks, enemies and other important entities required to beat a level. A scenemanager instantiates a 
+    /// Game manager singleton if it is not present, and sends communications to many runtime lists and mediators
     /// </summary>
     public class LevelManager : MonoBehaviour
     {
         [Tooltip("The game manager prefab. In case of the manager not being instantiated, the scene manager can instantiate a copy")]
         public GameManager gameManagerPrefab;
 
-        [Tooltip("This is the list of win conditions. When this list is empty, the scene is complete")]
+        [Tooltip("This is the list of win conditions game objects. When enough winconditions are satisfied, the level completes")]
         public GameObjectRunTimeList winConditions;
 
         [Tooltip("The number of win conditions to satisfy before the level is complete")]
         public int winConditionsToWin;
 
-        [Tooltip("This is the list of fail conditions. When this list is empty, the scene ends with game over")]
+        [Tooltip("When the levelmanager is completed, these objects are activated")]
+        public GameObjectRunTimeList winObjectsToActivate;
+
+        [Tooltip("When the level manager is completed, notify this mediator")]
+        public MediatorAsset notifyOnWin;
+
+        [Tooltip("This is the list of fail condition game objects. When enough failconditions are satisfied, the level failes")]
         public GameObjectRunTimeList failConditions;
 
         [Tooltip("This is the amount of winconsitions to satisfy before the level is failed")]
         public int failConditionsToFail;
 
-        [Tooltip("When the levelmanager is completed, the event is sent to this mediator")]
-        public MediatorAsset winMediator;
+        [Tooltip("When the levelmanager is failed, these objects are activated")]
+        public GameObjectRunTimeList failObjectsToActivate;
 
-        [Tooltip("When the levelmanager is failed, the event is sent to this mediator")]
-        public MediatorAsset failMediator;
+        [Tooltip("When the level manager has failed, notify this mediator")]
+        public MediatorAsset notifyOnFail;
 
         // This event is invoked when all the conditions in the scene have been met
         public event Action OnLevelComplete;
@@ -67,15 +73,15 @@ namespace StupidGirlGames.BreakOut
                 failConditions.OnEmpty += FailConditionMet;
 			}
 
-            if(winMediator != null)
-            {
-                OnLevelComplete += winMediator.Notify;
-            }
+            if(notifyOnWin != null)
+			{
+                OnLevelComplete += notifyOnWin.Notify;
+			}
 
-            if(failMediator != null)
-            {
-                OnLevelFailed += failMediator.Notify;
-            }
+            if(notifyOnFail != null)
+			{
+                OnLevelFailed += notifyOnFail.Notify;
+			}
 		}
 
         
@@ -91,16 +97,16 @@ namespace StupidGirlGames.BreakOut
                 failConditions.OnEmpty -= FailConditionMet;
 			}
 
-            if(winMediator != null)
+            if (notifyOnWin != null)
             {
-                OnLevelComplete -= winMediator.Notify;
+                OnLevelComplete -= notifyOnWin.Notify;
             }
 
-            if(failMediator != null)
+            if (notifyOnFail != null)
             {
-                OnLevelFailed -= failMediator.Notify;
+                OnLevelFailed -= notifyOnFail.Notify;
             }
-		}
+        }
 
         /// <summary>
         /// Called everytime a win condition is met. When enough win conditions are met
@@ -112,6 +118,13 @@ namespace StupidGirlGames.BreakOut
             if(winCounter >= winConditionsToWin)
 			{
                 OnLevelComplete?.Invoke();
+                if(winObjectsToActivate != null)
+				{
+                    foreach(GameObject gameObject in winObjectsToActivate.Objects)
+					{
+                        gameObject.SetActive(true);
+					}
+				}
 			}
 		}
 
@@ -125,7 +138,14 @@ namespace StupidGirlGames.BreakOut
             if(failCounter >= failConditionsToFail)
 			{
                 OnLevelFailed?.Invoke();
-			}
+                if (winObjectsToActivate != null)
+                {
+                    foreach (GameObject gameObject in failObjectsToActivate.Objects)
+                    {
+                        gameObject.SetActive(true);
+                    }
+                }
+            }
 		}
 	}
 }

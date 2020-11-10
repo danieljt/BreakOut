@@ -54,6 +54,11 @@ namespace StupidGirlGames.Patterns.Mediator
 				OnEmpty?.Invoke();
 			}
 		}
+
+		/// <summary>
+		/// Get the list of objects
+		/// </summary>
+		public List<T> Objects { get { return objects; } }
 	}
 }
 

@@ -623,7 +623,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 202622425}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &202622425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1843,7 +1855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &828359029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3588,8 +3600,12 @@ MonoBehaviour:
   gameManagerPrefab: {fileID: 2195759115812971846, guid: de0575714a49429488754168dd5fdb93, type: 3}
   winConditions: {fileID: 11400000, guid: 0b209509f863bcd4d86b3905c95a74e1, type: 2}
   winConditionsToWin: 1
+  winObjectsToActivate: {fileID: 11400000, guid: 509d434a0f9008e4ab9ba560ba32809c, type: 2}
+  notifyOnWin: {fileID: 11400000, guid: d6f4c676825626d43b63c3a689727e2a, type: 2}
   failConditions: {fileID: 11400000, guid: a96eedcbe83321443a000556ddf17181, type: 2}
   failConditionsToFail: 1
+  failObjectsToActivate: {fileID: 11400000, guid: 104d581e85c3cac45abda4a4389f4285, type: 2}
+  notifyOnFail: {fileID: 11400000, guid: f3d9a4b3002465f40be90963fe3d793b, type: 2}
 --- !u!4 &1546623092
 Transform:
   m_ObjectHideFlags: 0

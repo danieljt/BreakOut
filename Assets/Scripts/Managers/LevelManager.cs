@@ -1,8 +1,7 @@
 ﻿using StupidGirlGames.Patterns.Mediator;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 namespace StupidGirlGames.BreakOut
 {
@@ -22,8 +21,8 @@ namespace StupidGirlGames.BreakOut
         [Tooltip("The number of win conditions to satisfy before the level is complete")]
         public int winConditionsToWin;
 
-        [Tooltip("When the levelmanager is completed, these objects are activated")]
-        public GameObjectRunTimeList winObjectsToActivate;
+        [Tooltip("When the levelmanager is completed, these objects are instantiated")]
+        public List<GameObject> winObjectsToActivate;
 
         [Tooltip("When the level manager is completed, notify this mediator")]
         public MediatorAsset notifyOnWin;
@@ -35,7 +34,7 @@ namespace StupidGirlGames.BreakOut
         public int failConditionsToFail;
 
         [Tooltip("When the levelmanager is failed, these objects are activated")]
-        public GameObjectRunTimeList failObjectsToActivate;
+        public List<GameObject> failObjectsToActivate;
 
         [Tooltip("When the level manager has failed, notify this mediator")]
         public MediatorAsset notifyOnFail;
@@ -118,13 +117,7 @@ namespace StupidGirlGames.BreakOut
             if(winCounter >= winConditionsToWin)
 			{
                 OnLevelComplete?.Invoke();
-                if(winObjectsToActivate != null)
-				{
-                    foreach(GameObject gameObject in winObjectsToActivate.Objects)
-					{
-                        gameObject.SetActive(true);
-					}
-				}
+                InstantiateObjects(winObjectsToActivate);
 			}
 		}
 
@@ -138,14 +131,23 @@ namespace StupidGirlGames.BreakOut
             if(failCounter >= failConditionsToFail)
 			{
                 OnLevelFailed?.Invoke();
-                if (winObjectsToActivate != null)
-                {
-                    foreach (GameObject gameObject in failObjectsToActivate.Objects)
-                    {
-                        gameObject.SetActive(true);
-                    }
-                }
+                InstantiateObjects(failObjectsToActivate);
             }
+		}
+
+        /// <summary>
+        /// Instantiate all the objects in the list given that the list exists
+        /// </summary>
+        /// <param name="list"></param>
+        private void InstantiateObjects(List<GameObject> list)
+		{
+            if(list != null)
+			{
+                foreach(GameObject gameObject in list)
+				{
+                    Instantiate(gameObject, Vector3.zero, Quaternion.identity);
+				}
+			}
 		}
 	}
 }

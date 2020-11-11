@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
@@ -13,9 +11,11 @@ namespace StupidGirlGames.BreakOut
     /// </summary>
     public class MenuController : MonoBehaviour
     {
-		private void Awake()
+        public GameObject firstSelected;
+
+		private void Start()
 		{
-			//EventSystem.
+            EventSystem.current.SetSelectedGameObject(firstSelected);
 		}
 
 		/// <summary>
@@ -47,6 +47,14 @@ namespace StupidGirlGames.BreakOut
         public void RestartLevel()
 		{
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		}
+
+        /// <summary>
+        /// Load the main menu
+        /// </summary>
+        public void LoadMainMenu()
+		{
+            SceneManager.LoadScene("MainMenu");
 		}
     }
 }

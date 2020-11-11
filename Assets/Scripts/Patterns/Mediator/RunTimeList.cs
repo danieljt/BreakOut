@@ -22,7 +22,7 @@ namespace StupidGirlGames.Patterns.Mediator
 		public event Action<T> OnRemoved;
 
 		// This is the list of objects
-		protected List<T> objects;
+		protected List<T> objects = new List<T>();
 
 		/// <summary>
 		/// Add the newObject to the list if it is not there from before

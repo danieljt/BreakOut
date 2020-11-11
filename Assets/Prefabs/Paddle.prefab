@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4014646126881166568}
   - component: {fileID: -1016502835701511070}
   - component: {fileID: 5999548970879527516}
+  - component: {fileID: -6715240728002272936}
+  - component: {fileID: 4782247204206713578}
   m_Layer: 0
   m_Name: Paddle
   m_TagString: Untagged
@@ -177,6 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  ballPrefab: {fileID: 0}
+  launchDirection: {x: 0, y: 0}
 --- !u!114 &5999548970879527516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,3 +194,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreMediator: {fileID: 11400000, guid: 001a575aedd0a844a945f80a66d888e1, type: 2}
+--- !u!114 &-6715240728002272936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655488621588991901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c377629747eb04ba694934384e1bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathBehaviour: 1
+--- !u!114 &4782247204206713578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655488621588991901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0380ba83ea1b13488a33bda35dbe9f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runTimeList: {fileID: 11400000, guid: 2bdc73fc2cd82924b81e9feeef0bed47, type: 2}

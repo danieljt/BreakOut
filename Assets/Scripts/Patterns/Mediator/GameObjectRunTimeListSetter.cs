@@ -15,12 +15,19 @@ namespace StupidGirlGames.Patterns.Mediator
 
 		private void OnEnable()
 		{
-            runTimeList.Add(this.gameObject);
+			if (runTimeList != null)
+			{
+				runTimeList.Add(gameObject);
+			}
+
 		}
 
 		private void OnDisable()
 		{
-			runTimeList.Remove(this.gameObject);
+			if (runTimeList != null)
+			{
+				runTimeList.Remove(gameObject);
+			}
 		}
 	}
 }

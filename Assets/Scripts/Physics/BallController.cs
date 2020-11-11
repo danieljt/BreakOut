@@ -22,43 +22,36 @@ namespace StupidGirlGames.BreakOut
         public Vector2 startDirection;
 
         private Rigidbody2D body;
-		private readonly GameObject owner;
 
-        /// <summary>
-        /// The owner of this ball. By default, this gameobject will be it's own owner.
-        /// Remember to set this property on instantiation.
-        /// </summary>
-        public GameObject Owner { set; get; }
+		/// <summary>
+		/// The owner of this ball. By default, this gameobject will be it's own owner.
+		/// Remember to set this property on instantiation.
+		/// </summary>
+		public GameObject Owner { set; get; }
 
 		private void Awake()
 		{
-            Owner = this.gameObject;
-            body = GetComponent<Rigidbody2D>();
+			body = GetComponent<Rigidbody2D>();
 		}
-
-        /// <summary>
-        /// We compute special collision responses to certain objects
-        /// </summary>
-        /// <param name="collision"></param>
-		private void OnCollisionEnter2D(Collision2D collision)
-		{
-            IHealth healthInterface = collision.gameObject.GetComponent<IHealth>();
-            if(healthInterface != null)
-			{
-                healthInterface.LoseHealth(new Attack(Owner, damage));
-			}
-
-            // make sure the ball does not exceed the max velocity
-            body.velocity = body.velocity.normalized * maxSpeed;
-		}
-
-        /// <summary>
-        /// Sets the direction and send the ball in that direction with the max speed
-        /// </summary>
-        /// <param name="direction"></param>
-        public void SetDirection(Vector2 direction)
+		/// <summary>
+		/// Sets the direction and send the ball in that direction with the max speed
+		/// </summary>
+		/// <param name="direction"></param>
+		public void SetDirection(Vector2 direction)
 		{
             body.velocity = direction.normalized * maxSpeed;
+		}
+
+		private void OnDisable()
+		{
+			if(Owner != null)
+			{
+				IDeath death = Owner.GetComponent<IDeath>();
+				if(death != null)
+				{
+					death.Die(new Attack(gameObject, 1));
+				}
+			}
 		}
 	}
 }

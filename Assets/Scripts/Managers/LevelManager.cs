@@ -5,147 +5,143 @@ using System.Collections.Generic;
 
 namespace StupidGirlGames.BreakOut
 {
-    /// <summary>
-    /// A scenemanager is the main manager for each scene. This script holds important information about the
-    /// blocks, enemies and other important entities required to beat a level. A scenemanager instantiates a 
-    /// Game manager singleton if it is not present, and sends communications to many runtime lists and mediators
-    /// </summary>
-    public class LevelManager : MonoBehaviour
-    {
-        [Tooltip("The game manager prefab. In case of the manager not being instantiated, the scene manager can instantiate a copy")]
-        public GameManager gameManagerPrefab;
+	/// <summary>
+	/// A scenemanager is the main manager for each scene. This script holds important information about the
+	/// blocks, enemies and other important entities required to beat a level. A scenemanager instantiates a 
+	/// Game manager singleton if it is not present, and sends communications to many runtime lists and mediators
+	/// </summary>
+	public class LevelManager : MonoBehaviour
+	{
+		[Tooltip("The game manager prefab. In case of the manager not being instantiated, the scene manager can instantiate a copy")]
+		public GameManager gameManagerPrefab;
 
-        [Tooltip("This is the list of win conditions game objects. When enough winconditions are satisfied, the level completes")]
-        public GameObjectRunTimeList winConditions;
+		[Tooltip("The number of win conditions to satisfy before the level is complete")]
+		public int winConditionsToWin;
 
-        [Tooltip("The number of win conditions to satisfy before the level is complete")]
-        public int winConditionsToWin;
+		[Tooltip("This level manager recieves win events from this mediator")]
+		public GameObjectMediatorAsset winConditionMet;
 
-        [Tooltip("When the levelmanager is completed, these objects are instantiated")]
-        public List<GameObject> winObjectsToActivate;
+		[Tooltip("When enough win conditions are satisfied, notify this mediator")]
+		public MediatorAsset notifyOnWin;
 
-        [Tooltip("When the level manager is completed, notify this mediator")]
-        public MediatorAsset notifyOnWin;
+		[Tooltip("This is the amount of winconsitions to satisfy before the level is failed")]
+		public int failConditionsToFail;
 
-        [Tooltip("This is the list of fail condition game objects. When enough failconditions are satisfied, the level failes")]
-        public GameObjectRunTimeList failConditions;
+		[Tooltip("The levelmanager recieves fail events from this mediator")]
+		public GameObjectMediatorAsset failConditionMet;
 
-        [Tooltip("This is the amount of winconsitions to satisfy before the level is failed")]
-        public int failConditionsToFail;
+		[Tooltip("When the level manager has failed, notify this mediator")]
+		public MediatorAsset notifyOnFail;
 
-        [Tooltip("When the levelmanager is failed, these objects are activated")]
-        public List<GameObject> failObjectsToActivate;
+		// This event is invoked when all the conditions in the scene have been met
+		public event Action OnLevelComplete;
 
-        [Tooltip("When the level manager has failed, notify this mediator")]
-        public MediatorAsset notifyOnFail;
+		// This event is invoked when a scene is failed
+		public event Action OnLevelFailed;
 
-        // This event is invoked when all the conditions in the scene have been met
-        public event Action OnLevelComplete;
+		// Use these conters to count win and fail conditions when they are called
+		private int winCounter;
+		private int failCounter;
 
-        // This event is invoked when a scene is failed
-        public event Action OnLevelFailed;
-
-        // Use these conters to count win and fail conditions when they are called
-        private int winCounter;
-        private int failCounter;
+		// These lists hold the win and fail conditions when they are called
+		private List<GameObject> winConditionsList;
+		private List<GameObject> failConditionsList;
 
 		private void Awake()
 		{
-			if(!GameManager.IsInstantiated)
+
+			// We check to see if the game manager is instantiated, and if not we instantiate
+			// a new copy. Make sure to add a reference to it in the Level manager prefab.
+			if (!GameManager.IsInstantiated)
 			{
-                Instantiate(gameManagerPrefab);
+				Instantiate(gameManagerPrefab);
 			}
 
-            winCounter = 0;
-            failCounter = 0;
+			winCounter = 0;
+			failCounter = 0;
+			winConditionsList = new List<GameObject>();
+			failConditionsList = new List<GameObject>();
 		}
 
 		private void OnEnable()
 		{
-            if (winConditions != null)
-            {
-                winConditions.OnEmpty += WinConditionMet ;
-            }
-
-            if(failConditions != null)
+			if (winConditionMet != null)
 			{
-                failConditions.OnEmpty += FailConditionMet;
+				winConditionMet.OnNotify += WinConditionMet;
 			}
 
-            if(notifyOnWin != null)
+			if (notifyOnWin != null)
 			{
-                OnLevelComplete += notifyOnWin.Notify;
+				OnLevelComplete += notifyOnWin.Notify;
 			}
 
-            if(notifyOnFail != null)
+			if (failConditionMet != null)
 			{
-                OnLevelFailed += notifyOnFail.Notify;
+				failConditionMet.OnNotify += FailConditionMet;
+			}
+
+			if (notifyOnFail != null)
+			{
+				OnLevelFailed += notifyOnFail.Notify;
 			}
 		}
 
-        
+
 		private void OnDisable()
 		{
-            if (winConditions != null)
-            {
-                winConditions.OnEmpty -= WinConditionMet;
-            }
-
-            if(failConditions != null)
+			if (winConditionMet != null)
 			{
-                failConditions.OnEmpty -= FailConditionMet;
+				winConditionMet.OnNotify -= WinConditionMet;
 			}
 
-            if (notifyOnWin != null)
-            {
-                OnLevelComplete -= notifyOnWin.Notify;
-            }
-
-            if (notifyOnFail != null)
-            {
-                OnLevelFailed -= notifyOnFail.Notify;
-            }
-        }
-
-        /// <summary>
-        /// Called everytime a win condition is met. When enough win conditions are met
-        /// the level managers calls the LevelComplete event.
-        /// </summary>
-        private void WinConditionMet()
-		{
-            winCounter++;
-            if(winCounter >= winConditionsToWin)
+			if (notifyOnWin != null)
 			{
-                OnLevelComplete?.Invoke();
-                InstantiateObjects(winObjectsToActivate);
+				OnLevelComplete -= notifyOnWin.Notify;
+			}
+
+			if (failConditionMet != null)
+			{
+				failConditionMet.OnNotify -= FailConditionMet;
+			}
+
+			if (notifyOnFail != null)
+			{
+				OnLevelFailed -= notifyOnFail.Notify;
 			}
 		}
 
-        /// <summary>
-        /// Called everytime a fail condition is met. When enough fail conditions are met
-        /// the level manager calls the OnLevelFailed event. 
-        /// </summary>
-        private void FailConditionMet()
+		/// <summary>
+		/// Called everytime a win condition is met. The condition GameObject is added to a list.
+		/// When enough win conditions are met the level managers calls the LevelComplete event.
+		/// A gameobject can only have one appearance in each list.
+		/// </summary>
+		private void WinConditionMet(GameObject condition)
 		{
-            failCounter++;
-            if(failCounter >= failConditionsToFail)
+			if (!winConditionsList.Contains(condition))
 			{
-                OnLevelFailed?.Invoke();
-                InstantiateObjects(failObjectsToActivate);
-            }
-		}
-
-        /// <summary>
-        /// Instantiate all the objects in the list given that the list exists
-        /// </summary>
-        /// <param name="list"></param>
-        private void InstantiateObjects(List<GameObject> list)
-		{
-            if(list != null)
-			{
-                foreach(GameObject gameObject in list)
+				winCounter++;
+				winConditionsList.Add(condition);
+				if (winCounter >= winConditionsToWin)
 				{
-                    Instantiate(gameObject, Vector3.zero, Quaternion.identity);
+					OnLevelComplete?.Invoke();
+				}
+			}
+		}
+
+		/// <summary>
+		/// Called everytime a fail condition is met. The condition gameobject is added to a list.
+		/// When enough fail conditions are met the level manager calls the OnLevelFailed event. 
+		/// A gameobject can only have one appearance in each list.
+		/// </summary>
+		private void FailConditionMet(GameObject condition)
+		{
+			if (!failConditionsList.Contains(condition))
+			{
+				failCounter++;
+				failConditionsList.Add(condition);
+				if (failCounter >= failConditionsToFail)
+				{
+					OnLevelFailed?.Invoke();
 				}
 			}
 		}

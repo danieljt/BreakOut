@@ -44,13 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManagerPrefab: {fileID: 2195759115812971846, guid: de0575714a49429488754168dd5fdb93, type: 3}
-  winConditions: {fileID: 11400000, guid: 0b209509f863bcd4d86b3905c95a74e1, type: 2}
   winConditionsToWin: 1
-  winObjectsToActivate:
-  - {fileID: 624942104267071804, guid: dcc4e426734c3af4a934884060c039d5, type: 3}
+  winConditionMet: {fileID: 11400000, guid: 14d00f374b4cbcc42827541ba0aafdc8, type: 2}
   notifyOnWin: {fileID: 11400000, guid: d6f4c676825626d43b63c3a689727e2a, type: 2}
-  failConditions: {fileID: 11400000, guid: a96eedcbe83321443a000556ddf17181, type: 2}
   failConditionsToFail: 1
-  failObjectsToActivate:
-  - {fileID: 3177508756594659590, guid: 373c1b68575501f4587325ec8fd8b6f0, type: 3}
+  failConditionMet: {fileID: 11400000, guid: 34bddc151c5506a43afacaa62f33d454, type: 2}
   notifyOnFail: {fileID: 11400000, guid: f3d9a4b3002465f40be90963fe3d793b, type: 2}

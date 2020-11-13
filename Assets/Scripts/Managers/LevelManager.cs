@@ -47,6 +47,11 @@ namespace StupidGirlGames.BreakOut
 		private List<GameObject> winConditionsList;
 		private List<GameObject> failConditionsList;
 
+		// These booleans are for when a level is completed or failed. An object can be sendt by the
+		// mediators
+		private bool levelComplete;
+		private bool levelFailed;
+
 		private void Awake()
 		{
 
@@ -61,6 +66,8 @@ namespace StupidGirlGames.BreakOut
 			failCounter = 0;
 			winConditionsList = new List<GameObject>();
 			failConditionsList = new List<GameObject>();
+			levelComplete = false;
+			levelFailed = false;
 		}
 
 		private void OnEnable()
@@ -123,7 +130,11 @@ namespace StupidGirlGames.BreakOut
 				winConditionsList.Add(condition);
 				if (winCounter >= winConditionsToWin)
 				{
-					OnLevelComplete?.Invoke();
+					if (!levelComplete)
+					{
+						levelComplete = true;
+						OnLevelComplete?.Invoke();
+					}
 				}
 			}
 		}
@@ -141,7 +152,11 @@ namespace StupidGirlGames.BreakOut
 				failConditionsList.Add(condition);
 				if (failCounter >= failConditionsToFail)
 				{
-					OnLevelFailed?.Invoke();
+					if (!levelFailed)
+					{
+						levelFailed = true;
+						OnLevelFailed?.Invoke();
+					}
 				}
 			}
 		}

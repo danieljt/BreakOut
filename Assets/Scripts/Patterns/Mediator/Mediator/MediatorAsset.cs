@@ -20,7 +20,7 @@ namespace StupidGirlGames.Patterns.Mediator
         /// be subscribed to by a senders delegate
         /// </summary>
         /// <param name="message"></param>
-        public void Notify()
+        public void CallNotify()
 		{
             OnNotify?.Invoke();
 		}

@@ -36,7 +36,7 @@ namespace StupidGirlGames.BreakOut
 		{
 			if(mediator != null)
 			{
-                OnCount += mediator.Notify;
+                OnCount += mediator.CallNotify;
 			}
 		}
 
@@ -44,7 +44,7 @@ namespace StupidGirlGames.BreakOut
 		{
 			if(mediator != null)
 			{
-                OnCount -= mediator.Notify;
+                OnCount -= mediator.CallNotify;
 			}
 		}
 		private void Start()

@@ -39,7 +39,7 @@ namespace StupidGirlGames.BreakOut
 
             if(mediator != null)
 			{
-                OnRunTimeListEmpty += mediator.Notify;
+                OnRunTimeListEmpty += mediator.CallNotify;
 			}
 		}
 
@@ -52,7 +52,7 @@ namespace StupidGirlGames.BreakOut
 
             if(mediator != null)
 			{
-                OnRunTimeListEmpty -= mediator.Notify;
+                OnRunTimeListEmpty -= mediator.CallNotify;
 			}
         }
 

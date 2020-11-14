@@ -74,7 +74,7 @@ namespace StupidGirlGames.BreakOut
 		{
 			if (winConditionMet != null)
 			{
-				winConditionMet.OnNotify += WinConditionMet;
+				winConditionMet.Notify += WinConditionMet;
 			}
 
 			if (notifyOnWin != null)
@@ -84,7 +84,7 @@ namespace StupidGirlGames.BreakOut
 
 			if (failConditionMet != null)
 			{
-				failConditionMet.OnNotify += FailConditionMet;
+				failConditionMet.Notify += FailConditionMet;
 			}
 
 			if (notifyOnFail != null)
@@ -98,7 +98,7 @@ namespace StupidGirlGames.BreakOut
 		{
 			if (winConditionMet != null)
 			{
-				winConditionMet.OnNotify -= WinConditionMet;
+				winConditionMet.Notify -= WinConditionMet;
 			}
 
 			if (notifyOnWin != null)
@@ -108,7 +108,7 @@ namespace StupidGirlGames.BreakOut
 
 			if (failConditionMet != null)
 			{
-				failConditionMet.OnNotify -= FailConditionMet;
+				failConditionMet.Notify -= FailConditionMet;
 			}
 
 			if (notifyOnFail != null)

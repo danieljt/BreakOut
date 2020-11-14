@@ -13,16 +13,16 @@ namespace StupidGirlGames.Patterns.Mediator
     public abstract class AbstractMediatorAsset<T> : ScriptableObject
     {
         // This event is called when an object calls the notify 
-        public event Action<T> OnNotify;
+        public event Action<T> Notify;
 
         /// <summary>
         /// call this method to notify all listeners about the event. This method can
         /// be subscribed to by a senders delegate
         /// </summary>
         /// <param name="message"></param>
-        public void Notify(T message)
+        public void CallNotify(T message)
 		{
-            OnNotify?.Invoke(message);
+            Notify?.Invoke(message);
 		}
     }
 }

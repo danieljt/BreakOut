@@ -41,7 +41,7 @@ namespace StupidGirlGames.BreakOut
 		{
 			if(scoreMediator != null)
 			{
-				scoreMediator.OnNotify += UpdateScore;
+				scoreMediator.Notify += UpdateScore;
 			}
 		}
 
@@ -49,7 +49,7 @@ namespace StupidGirlGames.BreakOut
 		{
 			if(scoreMediator != null)
 			{
-				scoreMediator.OnNotify -= UpdateScore;
+				scoreMediator.Notify -= UpdateScore;
 			}
 		}
 

@@ -29,7 +29,7 @@ namespace StupidGirlGames.ScoreSystem
 		{
 			if (scoreMediator != null)
 			{
-				OnScoreRecieved += scoreMediator.Notify;
+				OnScoreRecieved += scoreMediator.CallNotify;
 			}
 		}
 
@@ -37,7 +37,7 @@ namespace StupidGirlGames.ScoreSystem
 		{
 			if (scoreMediator != null)
 			{
-				OnScoreRecieved -= scoreMediator.Notify;
+				OnScoreRecieved -= scoreMediator.CallNotify;
 			}
 		}
 

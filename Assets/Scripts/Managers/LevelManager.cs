@@ -79,7 +79,7 @@ namespace StupidGirlGames.BreakOut
 
 			if (notifyOnWin != null)
 			{
-				OnLevelComplete += notifyOnWin.Notify;
+				OnLevelComplete += notifyOnWin.CallNotify;
 			}
 
 			if (failConditionMet != null)
@@ -89,7 +89,7 @@ namespace StupidGirlGames.BreakOut
 
 			if (notifyOnFail != null)
 			{
-				OnLevelFailed += notifyOnFail.Notify;
+				OnLevelFailed += notifyOnFail.CallNotify;
 			}
 		}
 
@@ -103,7 +103,7 @@ namespace StupidGirlGames.BreakOut
 
 			if (notifyOnWin != null)
 			{
-				OnLevelComplete -= notifyOnWin.Notify;
+				OnLevelComplete -= notifyOnWin.CallNotify;
 			}
 
 			if (failConditionMet != null)
@@ -113,7 +113,7 @@ namespace StupidGirlGames.BreakOut
 
 			if (notifyOnFail != null)
 			{
-				OnLevelFailed -= notifyOnFail.Notify;
+				OnLevelFailed -= notifyOnFail.CallNotify;
 			}
 		}
 

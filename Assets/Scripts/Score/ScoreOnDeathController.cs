@@ -1,7 +1,4 @@
 ﻿using StupidGirlGames.HealthSystem;
-using StupidGirlGames.AttackSystem;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace StupidGirlGames.ScoreSystem
@@ -38,11 +35,12 @@ namespace StupidGirlGames.ScoreSystem
 		}
 
 		/// <summary>
-		/// Gives the score to the target scoreReciever
+		/// Gives the score to the killer, if the killer is not null and has a IScoreReciever interface. 
+		/// If the killer is null then nothing will happen
 		/// </summary>
-		private void GiveScore(Attack attack)
+		private void GiveScore(GameObject killer)
 		{
-			GameObject scoreReciever = attack.owner;
+			GameObject scoreReciever = killer;
 			if (scoreReciever != null)
 			{
 				IScoreReciever recieverInterface = scoreReciever.GetComponent<IScoreReciever>();

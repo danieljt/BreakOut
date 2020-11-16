@@ -12,7 +12,7 @@ namespace StupidGirlGames.HealthSystem
     public interface IHealth
     {
         event Action<Attack> OnHealthChanged;
-        event Action<Attack> OnHealthZero;
+        event Action<GameObject> OnHealthZero;
 
         void LoseHealth(Attack attack);
         void GainHealth(Attack attack);

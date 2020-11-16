@@ -1,18 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
-using StupidGirlGames.AttackSystem;
 
 namespace StupidGirlGames.HealthSystem
 {
     /// <summary>
-    /// Common interface for all objects that can die. 
+    /// Common interface for all objects that can die. When an object dies, we get the
+    /// gameobject that did the kill.
     /// </summary>
     public interface IDeath
     {
-        event Action<Attack> OnDeath;
+        event Action<GameObject> OnDeath;
 
-        void Die(Attack attack);
+        void Die(GameObject killer);
     }
 }

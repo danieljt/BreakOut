@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using StupidGirlGames.AttackSystem;
 
 namespace StupidGirlGames.HealthSystem
 {
@@ -13,7 +12,7 @@ namespace StupidGirlGames.HealthSystem
 		public DeathBehaviour deathBehaviour;
 
 		// Called when this object dies
-		public event Action<Attack> OnDeath;
+		public event Action<GameObject> OnDeath;
 		public IHealth healthInterface;
 
 		/// <summary>
@@ -51,13 +50,10 @@ namespace StupidGirlGames.HealthSystem
 		/// Kill the object. The object is killed according to how the deathBehaviour selected. It is important to
 		/// note that this method or the OnDeath event are not called when the object is destroyed or disabled out of this scope.
 		/// 
-		/// TODO:
-		/// Consider adding calls to this method when the gameobject is disabled or destroyed
-		/// outside of this method
 		/// </summary>
-		public void Die(Attack attack)
+		public void Die(GameObject killer)
 		{
-			OnDeath?.Invoke(attack);
+			OnDeath?.Invoke(killer);
 
 			switch(deathBehaviour)
 			{

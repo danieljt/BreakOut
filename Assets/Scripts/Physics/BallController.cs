@@ -15,9 +15,6 @@ namespace StupidGirlGames.BreakOut
         [Range(1.0f, 10f)]
         public float maxSpeed;
 
-        [Tooltip("This is the damage done by the ball")]
-        public int damage;
-
         [Tooltip("The start direction of the ball. This will be normalized")]
         public Vector2 startDirection;
 

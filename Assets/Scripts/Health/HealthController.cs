@@ -16,7 +16,7 @@ namespace StupidGirlGames.HealthSystem
 		public int maxHealth;
 		private int health;
 		public event Action<Attack> OnHealthChanged;
-		public event Action<Attack> OnHealthZero;
+		public event Action<GameObject> OnHealthZero;
 
 		private void Awake()
 		{
@@ -40,7 +40,7 @@ namespace StupidGirlGames.HealthSystem
 			// In the case of the health going down to zero
 			if(health <= 0)
 			{
-				OnHealthZero?.Invoke(attack);
+				OnHealthZero?.Invoke(attack.owner);
 			}
 		}
 

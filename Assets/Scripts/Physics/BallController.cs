@@ -18,7 +18,11 @@ namespace StupidGirlGames.BreakOut
         [Tooltip("The start direction of the ball. This will be normalized")]
         public Vector2 startDirection;
 
+		[Tooltip("The damage done by the ball")]
+		public int damage;
+
         private Rigidbody2D body;
+		private IDeath deathInterface;
 
 		/// <summary>
 		/// The owner of this ball. By default, this gameobject will be it's own owner.
@@ -29,6 +33,7 @@ namespace StupidGirlGames.BreakOut
 		private void Awake()
 		{
 			body = GetComponent<Rigidbody2D>();
+			deathInterface = GetComponent<IDeath>();
 		}
 		/// <summary>
 		/// Sets the direction and send the ball in that direction with the max speed
@@ -39,15 +44,51 @@ namespace StupidGirlGames.BreakOut
             body.velocity = direction.normalized * maxSpeed;
 		}
 
-		private void OnDisable()
+		/// <summary>
+		/// When the ball dies by an attack, it destroyes the owner as long as an owner exists. If the ball
+		/// is deactivated or destroyed, this method is not called. You must use the attack system for
+		/// this component to work.
+		/// </summary>
+		private void OnDeath(GameObject killer)
 		{
-			if(Owner != null)
+			if (Owner != null)
 			{
 				IDeath death = Owner.GetComponent<IDeath>();
-				if(death != null)
+				if (death != null)
 				{
-					death.Die(new Attack(gameObject, 1));
+					death.Die(killer);
 				}
+			}
+		}
+
+		/// <summary>
+		/// The ball does damage to the gameobject on collision as long as the gameobject has
+		/// an IHealth interface attached. The ball then makes an attack with Owner as the
+		/// attacker
+		/// </summary>
+		/// <param name="collision"></param>
+		private void OnCollisionEnter2D(Collision2D collision)
+		{
+			IHealth health = collision.gameObject.GetComponent<IHealth>();
+			if(health != null)
+			{
+				health.LoseHealth(new Attack(Owner, damage));
+			}
+		}
+
+		private void OnEnable()
+		{
+			if(deathInterface != null)
+			{
+				deathInterface.OnDeath += OnDeath;
+			}
+		}
+
+		private void OnDisable()
+		{
+			if(deathInterface != null)
+			{
+				deathInterface.OnDeath -= OnDeath;
 			}
 		}
 	}

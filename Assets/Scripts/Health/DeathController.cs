@@ -9,10 +9,13 @@ namespace StupidGirlGames.HealthSystem
     /// </summary>
     public class DeathController : MonoBehaviour, IDeath
     {
+		[Tooltip("The behaviour of the object when this gameobject dies")]
 		public DeathBehaviour deathBehaviour;
 
 		// Called when this object dies
 		public event Action<GameObject> OnDeath;
+
+		// The health interface this component can communicate with
 		public IHealth healthInterface;
 
 		/// <summary>

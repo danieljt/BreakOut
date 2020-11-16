@@ -15,6 +15,9 @@ namespace StupidGirlGames.BreakOut
 		[Tooltip("The game manager prefab. In case of the manager not being instantiated, the scene manager can instantiate a copy")]
 		public GameManager gameManagerPrefab;
 
+		[Tooltip("The gameobjects that this scenemanager can affect")]
+		public GameObjectRunTimeList sceneObjects;
+
 		[Tooltip("The number of win conditions to satisfy before the level is complete")]
 		public int winConditionsToWin;
 
@@ -134,6 +137,7 @@ namespace StupidGirlGames.BreakOut
 					{
 						levelComplete = true;
 						OnLevelComplete?.Invoke();
+						DestroyAllObjectsInScene(sceneObjects);
 					}
 				}
 			}
@@ -156,7 +160,25 @@ namespace StupidGirlGames.BreakOut
 					{
 						levelFailed = true;
 						OnLevelFailed?.Invoke();
+						DestroyAllObjectsInScene(sceneObjects);
 					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Destroy all gameobjects in the scene that are added to the runtimeList. Great for destroying things 
+		/// that can have an effect on the game while menues are showing. A typical example is the player losing 
+		/// a life because the ball hits the ground while the victory message is showing.
+		/// </summary>
+		/// <param name="runtimeList"></param>
+		private void DestroyAllObjectsInScene(GameObjectRunTimeList runtimeList)
+		{
+			if(runtimeList != null)
+			{
+				foreach(GameObject sceneObject in runtimeList.Objects)
+				{
+					Destroy(sceneObject);
 				}
 			}
 		}

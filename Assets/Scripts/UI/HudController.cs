@@ -53,6 +53,11 @@ namespace StupidGirlGames.BreakOut
 			}
 		}
 
+		private void Start()
+		{
+			UpdateScore(new Score(null, 0));	
+		}
+
 		/// <summary>
 		/// This method updates the hud score. 
 		/// </summary>

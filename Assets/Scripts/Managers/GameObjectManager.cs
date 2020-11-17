@@ -6,7 +6,8 @@ namespace StupidGirlGames.BreakOut
 {
     /// <summary>
     /// This is a manager class for gameobjects in a gameObject runtime list. When the runtimelist
-    /// is empty, this manager will call the corresponding GameObject mediator asset.
+    /// is empty, this manager will call the corresponding GameObject mediator asset about the
+    /// runtime list being empty.
     /// </summary>
     public class GameObjectManager : MonoBehaviour
     {
@@ -27,7 +28,7 @@ namespace StupidGirlGames.BreakOut
 
 		private void Awake()
 		{
-            alreadyEmpty = !alreadyEmpty;
+            alreadyEmpty = false;
 		}
 
 		private void OnEnable()

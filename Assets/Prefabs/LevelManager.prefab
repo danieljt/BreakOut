@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManagerPrefab: {fileID: 2195759115812971846, guid: de0575714a49429488754168dd5fdb93, type: 3}
+  sceneObjects: {fileID: 11400000, guid: cb80bcc88b09423408dbf92f00883337, type: 2}
   winConditionsToWin: 1
   winConditionMet: {fileID: 11400000, guid: 14d00f374b4cbcc42827541ba0aafdc8, type: 2}
   notifyOnWin: {fileID: 11400000, guid: d6f4c676825626d43b63c3a689727e2a, type: 2}

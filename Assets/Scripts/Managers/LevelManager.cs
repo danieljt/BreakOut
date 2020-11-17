@@ -50,10 +50,10 @@ namespace StupidGirlGames.BreakOut
 		private List<GameObject> winConditionsList;
 		private List<GameObject> failConditionsList;
 
-		// These booleans are for when a level is completed or failed. An object can be sendt by the
-		// mediators
-		private bool levelComplete;
-		private bool levelFailed;
+		// These booleans are for when a level is already completed or failed. An object can be sendt by the
+		// mediators even after the level has been flagged as complete. We use these booleans to stop any events
+		// from occuring after the level is complete.
+		private bool levelAlreadyEnded;
 
 		private void Awake()
 		{
@@ -69,8 +69,7 @@ namespace StupidGirlGames.BreakOut
 			failCounter = 0;
 			winConditionsList = new List<GameObject>();
 			failConditionsList = new List<GameObject>();
-			levelComplete = false;
-			levelFailed = false;
+			levelAlreadyEnded = false;
 		}
 
 		private void OnEnable()
@@ -133,9 +132,9 @@ namespace StupidGirlGames.BreakOut
 				winConditionsList.Add(condition);
 				if (winCounter >= winConditionsToWin)
 				{
-					if (!levelComplete)
+					if (!levelAlreadyEnded)
 					{
-						levelComplete = true;
+						levelAlreadyEnded = true;
 						OnLevelComplete?.Invoke();
 						DestroyAllObjectsInScene(sceneObjects);
 					}
@@ -156,9 +155,9 @@ namespace StupidGirlGames.BreakOut
 				failConditionsList.Add(condition);
 				if (failCounter >= failConditionsToFail)
 				{
-					if (!levelFailed)
+					if (!levelAlreadyEnded)
 					{
-						levelFailed = true;
+						levelAlreadyEnded = true;
 						OnLevelFailed?.Invoke();
 						DestroyAllObjectsInScene(sceneObjects);
 					}
@@ -176,9 +175,9 @@ namespace StupidGirlGames.BreakOut
 		{
 			if(runtimeList != null)
 			{
-				foreach(GameObject sceneObject in runtimeList.Objects)
+				for(int i=runtimeList.Objects.Count - 1; i >= 0; i--)
 				{
-					Destroy(sceneObject);
+					Destroy(runtimeList.Objects[i]);
 				}
 			}
 		}

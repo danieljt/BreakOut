@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Health\Attack.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Health\DeathController.cs" />
+    <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonSelectOnEnable.cs" />
     <Compile Include="Assets\Scripts\Score\ScoreOnDeathController.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
@@ -85,7 +86,7 @@
     <Compile Include="Assets\Scripts\Managers\GameObjectManager.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\Mediator\ScoreMediatorAsset.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\Mediator\MediatorAsset.cs" />
-    <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenuController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

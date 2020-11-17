@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace StupidGirlGames.BreakOut
 {
@@ -18,6 +19,11 @@ namespace StupidGirlGames.BreakOut
 			if (EventSystem.current != null && firstSelected != null)
 			{
 				EventSystem.current.SetSelectedGameObject(firstSelected);
+				Button button = firstSelected.GetComponent<Button>();
+				if(button)
+				{
+					button.OnSelect(null);
+				}
 			}
 		}
 	}

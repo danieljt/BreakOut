@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System;
 using StupidGirlGames.Patterns.Singleton;
 
 namespace StupidGirlGames.BreakOut
@@ -17,21 +17,6 @@ namespace StupidGirlGames.BreakOut
 		private void Start()
 		{
             DontDestroyOnLoad(this);
-		}
-
-        /// <summary>
-        /// Load the next scene
-        /// </summary>
-        public void LoadNextLevel()
-		{
-            if(SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
-            else
-            {
-                SceneManager.LoadScene(0);
-            }
 		}
 	}
 }

@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonSelectOnEnable.cs" />
     <Compile Include="Assets\Scripts\Score\ScoreOnDeathController.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\RunTimeList\GameObjectRunTimeList.cs" />
     <Compile Include="Assets\Scripts\UI\MenuController.cs" />
@@ -86,7 +87,8 @@
     <Compile Include="Assets\Scripts\Managers\GameObjectManager.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\Mediator\ScoreMediatorAsset.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\Mediator\MediatorAsset.cs" />
-    <Compile Include="Assets\Scripts\UI\MainMenuController.cs" />
+    <Compile Include="Assets\Scripts\Managers\SpawController.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\GameData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

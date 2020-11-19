@@ -2,17 +2,20 @@
 namespace StupidGirlGames.BreakOut
 {
     /// <summary>
-    /// Contains important game data. All data that needs to be saved is stored in this class.
-    /// Objects can read their data from this class on scene loads if they have the appropriate 
-    /// classes or interfaces.
+    /// This is the main save game file. This class holds all the dataclasses for each scene in the game. The game data is stored
+    /// hierarchical with the GameData holding sceneData for each scene and the sceneData holding save data for each object in the 
+    /// scene.
     /// </summary>
     [System.Serializable]
     public class GameData
     {
         public string gameName;
-        public int levelNumber;
-        public int score;
-        public int lives;
-        public int health;
+        public SceneData[] sceneData;
+
+        public GameData(string newGameName, SceneData[] newSceneData)
+		{
+            this.gameName = newGameName;
+            this.sceneData = newSceneData;
+		}
     }
 }

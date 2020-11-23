@@ -8,9 +8,14 @@ namespace StupidGirlGames.BreakOut
     /// </summary>
     public class PaddleController : MonoBehaviour
     {
+		[Tooltip("Speed of the paddle")]
 		public float speed;
+
+		[Tooltip("The ball that this paddle spawns")]
 		public GameObject ballPrefab;
-		public Vector2 launchDirection;
+
+		[Tooltip("The maximum launch angle (Also includes negative values)")]
+		public float maxLaunchAngle;
 
         private PlayerInput input;
         private Rigidbody2D body;
@@ -69,14 +74,16 @@ namespace StupidGirlGames.BreakOut
 		private void LaunchBall()
 		{
 			if (ball == null)
-			{
+			{	
 				ball = Instantiate(ballPrefab);
 				ball.transform.position = transform.position + new Vector3(0, 0.5f, 0);
 				BallController ballController = ball.GetComponent<BallController>();
 				if(ballController != null)
 				{
 					ballController.Owner = this.gameObject;
-					ballController.SetDirection(launchDirection);
+					float angle = Random.Range(-maxLaunchAngle, maxLaunchAngle);
+					Vector3 direction = Quaternion.AngleAxis(angle, transform.forward)*transform.up;
+					ballController.SetDirection(direction);
 				}
 			}
 		}

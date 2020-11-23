@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6241164546033182776}
   - component: {fileID: 6241164546033182777}
+  - component: {fileID: -507315742236057404}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -46,3 +47,17 @@ MonoBehaviour:
   runTimeList: {fileID: 11400000, guid: 2bdc73fc2cd82924b81e9feeef0bed47, type: 2}
   mediator: {fileID: 11400000, guid: 34bddc151c5506a43afacaa62f33d454, type: 2}
   invokeOnce: 0
+--- !u!114 &-507315742236057404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6241164546033182782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e99b4039a4882b46a86f776120af59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMediator: {fileID: 0}
+  allPlayersDied: {fileID: 0}

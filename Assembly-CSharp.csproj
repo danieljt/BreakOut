@@ -94,6 +94,8 @@
     <Compile Include="Assets\Scripts\Managers\GameObjectManager.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\Mediator\ScoreMediatorAsset.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\Mediator\MediatorAsset.cs" />
+    <Compile Include="Assets\Scripts\Physics\PaddleSurfaceController.cs" />
+    <Compile Include="Assets\Scripts\Physics\PaddleSurfaceMaterial.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

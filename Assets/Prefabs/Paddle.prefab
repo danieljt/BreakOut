@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1655488621588991897}
   - component: {fileID: 4014646126881166568}
   - component: {fileID: -1016502835701511070}
+  - component: {fileID: 3727349142976339340}
   - component: {fileID: 5999548970879527516}
   - component: {fileID: -6715240728002272936}
   - component: {fileID: 4782247204206713578}
@@ -182,6 +183,21 @@ MonoBehaviour:
   speed: 5
   ballPrefab: {fileID: 5078913413988209507, guid: f343ba7b09600104688ab1cdca497c3e, type: 3}
   maxLaunchAngle: 80
+--- !u!114 &3727349142976339340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655488621588991901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c29a6f0be2a0a1419dee5ca7192ff59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDeflectionAngle: 0
+  maxDeflectionAngle: 80
+  material: {fileID: 11400000, guid: 6948aa2d2db2cc947bbd92974d80a22e, type: 2}
 --- !u!114 &5999548970879527516
 MonoBehaviour:
   m_ObjectHideFlags: 0

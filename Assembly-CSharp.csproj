@@ -66,7 +66,6 @@
     <Compile Include="Assets\Scripts\Score\ScoreOnDeathController.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
-    <Compile Include="Assets\Scripts\SaveLoad\SaveManager.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\RunTimeList\GameObjectRunTimeList.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveData.cs" />
     <Compile Include="Assets\Scripts\Managers\SpawController.cs" />
@@ -75,14 +74,12 @@
     <Compile Include="Assets\Scripts\Score\ScoreOnDamageController.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\GameData.cs" />
     <Compile Include="Assets\Scripts\Score\ScoreController.cs" />
-    <Compile Include="Assets\Scripts\SaveLoad\SceneData.cs" />
     <Compile Include="Assets\Scripts\Health\HealthController.cs" />
     <Compile Include="Assets\Scripts\Score\Score.cs" />
     <Compile Include="Assets\Scripts\Health\IHealth.cs" />
     <Compile Include="Assets\Scripts\Health\IDeath.cs" />
     <Compile Include="Assets\Scripts\Health\DamageOnTouchController.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\Mediator\SaveDataMediatorAsset.cs" />
-    <Compile Include="Assets\Scripts\SaveLoad\SaveController.cs" />
     <Compile Include="Assets\Scripts\Physics\BallController.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\Mediator\GameObjectMediatorAsset.cs" />
     <Compile Include="Assets\Scripts\UI\HudController.cs" />

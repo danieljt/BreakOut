@@ -4,12 +4,14 @@ using UnityEngine;
 
 namespace StupidGirlGames.BreakOut
 {
-    /// <summary>
-    /// Holds save information about a gameobject in the scene
-    /// </summary>
-    [System.Serializable]
-    public class SaveData
-    {
-        public int[] position;
-    }
+	/// <summary>
+	/// Contains the save data for the game.
+	/// </summary>
+	[System.Serializable]
+	public struct SaveData
+	{
+		public string name;
+		public int levelNumber;
+		public int score;
+	}
 }

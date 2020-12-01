@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace StupidGirlGames.BreakOut
 {
     /// <summary>
@@ -9,13 +10,37 @@ namespace StupidGirlGames.BreakOut
     [System.Serializable]
     public class GameData
     {
-        public string gameName;
-        public SceneData[] sceneData;
+        // This is the main save data file. The game only has one file like this, holding
+        // all the save files. Do not change this filename under any circumstances
+        public const string dataFileName = "GameData.stgf";
 
-        public GameData(string newGameName, SceneData[] newSceneData)
+        // This is the list that holds the save datas. 
+        public List<SaveData> saveFiles;
+        
+        /// <summary>
+        /// This method adds the new save data to the game data list. The method sorts the savedata files
+        /// with respect to the score, setting the saveData with the highest scores first.
+        /// </summary>
+        /// <param name="newSaveData"></param>
+        public void Add(SaveData newSaveData)
 		{
-            this.gameName = newGameName;
-            this.sceneData = newSceneData;
-		}
+            if(!saveFiles.Contains(newSaveData))
+			{
+                saveFiles.Add(newSaveData);
+			} 
+
+            else
+			{
+                for(int i=0; i<saveFiles.Count; i++)
+				{
+                    if(newSaveData.Equals(saveFiles[i]))
+					{
+                        saveFiles[i] = newSaveData;
+                        
+                    }
+				}
+			}
+            saveFiles.Sort((x, y) => x.score.CompareTo(y.score));
+        }
     }
 }

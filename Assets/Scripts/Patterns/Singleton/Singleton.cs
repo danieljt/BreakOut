@@ -34,7 +34,7 @@ namespace StupidGirlGames.Patterns.Singleton
 			}
 		}
 
-		protected void Awake()
+		protected virtual void Awake()
 		{
 			Instantiate();
 		}

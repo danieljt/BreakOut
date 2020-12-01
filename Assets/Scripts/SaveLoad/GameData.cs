@@ -10,10 +10,6 @@ namespace StupidGirlGames.BreakOut
     [System.Serializable]
     public class GameData
     {
-        // This is the main save data file. The game only has one file like this, holding
-        // all the save files. Do not change this filename under any circumstances
-        public const string dataFileName = "GameData.stgf";
-
         // This is the list that holds the save datas. 
         public List<SaveData> saveFiles;
         

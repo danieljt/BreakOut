@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Patterns\Mediator\RunTimeList\RunTimeList.cs" />
+    <Compile Include="Assets\Scripts\Physics\PaddleSurfaceController.cs" />
     <Compile Include="Assets\Scripts\Health\Attack.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Health\DeathController.cs" />
@@ -94,7 +95,6 @@
     <Compile Include="Assets\Scripts\Managers\GameObjectManager.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\Mediator\ScoreMediatorAsset.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\Mediator\MediatorAsset.cs" />
-    <Compile Include="Assets\Scripts\Physics\PaddleSurfaceController.cs" />
     <Compile Include="Assets\Scripts\Physics\PaddleSurfaceMaterial.cs" />
   </ItemGroup>
   <ItemGroup>

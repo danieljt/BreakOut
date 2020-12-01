@@ -24,25 +24,30 @@ public class PaddleSurfaceMaterial : ScriptableObject
 
 	/// <summary>
 	/// Calculates an angle to add to a reflection of a ball from the paddle. The angle added is dependent on the position from the center of the 
-	/// paddle. The angle never exceeds the maximumangleToAdd This method uses a linear model.
+	/// paddle. The halfwidth describes the the halfextents from the paddle center. The angle never exceeds the maximumangleToAdd. 
+	/// This method uses a linear model.
+	/// 
 	/// </summary>
 	/// <param name="positionFromCenter"></param>
-	/// <param name="width"></param>
+	/// <param name="halfWidth"></param>
 	/// <returns></returns>
-	public float CalculateAngleToAddFromCollision(float positionFromCenter, float width)
+	public float CalculateAngleToAddFromCollision(float positionFromCenter, float halfWidth)
 	{
-		return positionFromCenter < sweetSpotDistance ? 0 : maximumAngleToAddFromCollision*positionFromCenter/width;
+		return Mathf.Abs(positionFromCenter) < Mathf.Abs(sweetSpotDistance) ? 0 : -maximumAngleToAddFromCollision*positionFromCenter/halfWidth;
 	}
 
 	/// <summary>
 	/// Calculates an angle to add from the velocity of the paddle. The speed of the paddle must be larger than the minimumVelocity to
 	/// take affect. The angle also never exceeds the maximumAngleToAddFromVelocity.
+	/// 
+	/// TODO:
+	/// THIS METHOD IS WRONG
 	/// </summary>
 	/// <param name="velocity"></param>
 	/// <param name="maxVelocity"></param>
 	/// <returns></returns>
 	public float CalculateAngleToAddFromVelocity(float velocity, float maxVelocity)
 	{
-		return velocity < minimumVelocity ? 0 : (velocity < maxVelocity ? maximumAngleToAddFromVelocity * velocity / maxVelocity : maxVelocity);
+		return Mathf.Abs(velocity) < Mathf.Abs(minimumVelocity) ? 0 : (Mathf.Abs(velocity) < Mathf.Abs(maxVelocity) ? maximumAngleToAddFromVelocity * velocity / maxVelocity : maxVelocity);
 	}
 }

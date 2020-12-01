@@ -182,7 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   ballPrefab: {fileID: 5078913413988209507, guid: f343ba7b09600104688ab1cdca497c3e, type: 3}
-  maxLaunchAngle: 80
+  maxLaunchAngle: 45
 --- !u!114 &3727349142976339340
 MonoBehaviour:
   m_ObjectHideFlags: 0

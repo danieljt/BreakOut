@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace StupidGirlGames.Patterns.Singleton
 {
@@ -24,7 +22,8 @@ namespace StupidGirlGames.Patterns.Singleton
 
 		/// <summary>
 		/// This method alows for the instantiation of a singleton from without the class scope. An instance is only
-		/// created if the static instance variable is null.
+		/// created if the static instance variable is null. This equals to lazy instantiation, so
+		/// be careful when using this.
 		/// </summary>
 		public void Instantiate()
 		{

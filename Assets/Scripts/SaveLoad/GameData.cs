@@ -36,6 +36,7 @@ namespace StupidGirlGames.BreakOut
                     }
 				}
 			}
+
             saveFiles.Sort((x, y) => x.score.CompareTo(y.score));
         }
     }

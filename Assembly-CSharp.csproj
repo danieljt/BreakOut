@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\UI\HudController.cs" />
     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Patterns\Singleton\Singleton.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\PaddleSaveLoadController.cs" />
     <Compile Include="Assets\Scripts\Physics\PaddleController.cs" />
     <Compile Include="Assets\Scripts\Score\IScoreReciever.cs" />
     <Compile Include="Assets\Scripts\Patterns\Mediator\Mediator\AbstractMediatorAsset.cs" />

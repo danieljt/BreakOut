@@ -2,6 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using StupidGirlGames.Patterns.Singleton;
+using StupidGirlGames.Patterns.Mediator;
 
 namespace StupidGirlGames.BreakOut
 {
@@ -13,6 +14,9 @@ namespace StupidGirlGames.BreakOut
     /// </summary>
     public class GameManager : Singleton<GameManager>
     {
+        [Tooltip("This is the mediator where savedata can be recieved and sent")]
+        public SaveDataMediatorAsset saveMediator;
+
         // This is the GameData 
         private GameData gameData;
 

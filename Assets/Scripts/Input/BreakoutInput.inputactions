@@ -11,7 +11,8 @@
                     "id": "4d76bc96-8798-4062-818c-c4765ec2ca1c",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Fire",
@@ -19,7 +20,8 @@
                     "id": "a3d28246-d8a2-48fa-8eec-50e72e3f522c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Cancel",
@@ -27,7 +29,8 @@
                     "id": "60a6a00e-68ca-4452-99e4-8f15f3f3fd4d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -155,7 +158,7 @@
                 {
                     "name": "",
                     "id": "5cf40341-e169-4aed-8e72-45bdc42ace6b",
-                    "path": "<Keyboard>/enter",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "New control scheme",
